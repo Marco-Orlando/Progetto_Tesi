@@ -13,3 +13,13 @@ def show_image(image):
   plt.imshow(image,interpolation='bilinear')
   plt.axis('off')
   plt.show()
+    
+def reconstruct_image(model,image):
+  model.eval()
+  if len(image.shape)==3:
+    image=image.unsqueeze(0)
+  image=image.to(next(model.parameters()).device)
+  with torch.no_grad():
+    x_rec, _ , _=model(image)
+  show_image(image.squeeze(0).cpu())
+  show_image(x_rec.squeeze(0).cpu())

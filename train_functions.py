@@ -2,6 +2,7 @@ import torch.nn.functional as F
 import torch
 from tqdm import tqdm
 import os 
+from utility_functions import reconstruct_image
 
 def loss_function(x_rec,x_real,mu,logvar):
   REC_LOSS=torch.mean(torch.sum(F.mse_loss(x_rec,x_real,reduction='none'),dim=[1, 2, 3]))
